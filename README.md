@@ -36,7 +36,7 @@ This project is a web application that fetches and stores cryptocurrency data fr
 
    ```bash
    git clone https://github.com/rameshchoyal/Backend-Assignment.git
-   cd your-repo/backend
+   cd Backend-Assignment /backend
 2. Install dependencies:
 
    ```bash
