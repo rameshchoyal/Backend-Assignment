@@ -6,14 +6,20 @@ import { fetchAndStoreData } from "./poller";
 require("dotenv").config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port: number = parseInt(process.env.PORT || "3000", 10);
 
 app.use(cors());
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+const mongodbUri: string = process.env.MONGODB_URI as string;
+
+if (!mongodbUri) {
+  throw new Error("MONGODB_URI environment variable is not defined");
+}
+
+mongoose
+  .connect(mongodbUri)
+  .then(() => console.log("MongoDB connected successfully"))
+  .catch((err) => console.error("MongoDB connection error:", err));
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
